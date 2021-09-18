@@ -153,7 +153,7 @@ pub fn dump_offsets_cpp<'a, 'b, 'c>(offsets: &[NamedOffset<'a, 'b, 'c>], data: &
             Either::Left(def) => def.get(data),
             Either::Right(n) => Ok(*n)
         };
-        buf.push_str(&format!("{}constexpr auto {} = {:#X};", if namespace.is_some() { "\t" } else { "" }, offset.name, val.as_ref().unwrap_or(&0)));
+        buf.push_str(&format!("{}constexpr auto {} = {:#X};", if namespace.is_some() { "    " } else { "" }, offset.name, val.as_ref().unwrap_or(&0)));
         println!("{}{} = {:#X}", offset.namespace.map(|n| n.to_string() + "_").unwrap_or_else(String::new), offset.name, val.as_ref().unwrap_or(&0));
         if let Err(e) = val.as_ref() {
             buf.push_str(&format!(" // {}", e))
