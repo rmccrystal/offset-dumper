@@ -8,6 +8,7 @@ use iced_x86::*;
 use either::Either;
 
 /// A structure that defines to the dumper how to retrieve an offset
+#[derive(Clone)]
 pub struct OffsetDefinition<'a, 'b> {
     /// List of sigs that the offset can be found with
     pub sigs: &'a [&'b str],
@@ -51,6 +52,7 @@ pub enum OffsetError {
 }
 
 /// A enum indicating how to get an offset from a successful sig search
+#[derive(Clone)]
 pub enum OffsetValueType {
     /// Instruction reads relative to the game's base address.
     /// Example: `lea r11, dword_17C29CB0` will return 0x17C29CB0
@@ -66,6 +68,7 @@ pub enum OffsetValueType {
 }
 
 /// An enum indicating how to find the wanted instruction from the signature location
+#[derive(Clone)]
 pub enum OffsetFindType {
     None,
     Mnemonic(iced_x86::Mnemonic),
@@ -111,6 +114,7 @@ impl OffsetDefinition<'_, '_> {
     }
 }
 
+#[derive(Clone)]
 pub struct NamedOffset<'a, 'b, 'c> {
     pub name: &'a str,
     pub namespace: Option<&'a str>,
